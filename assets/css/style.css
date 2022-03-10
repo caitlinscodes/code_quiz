@@ -1,1 +1,46 @@
 /* Add styling for background color, text color, etc. */
+
+html {
+  background-color: azure;
+}
+
+header {
+  background-color: aqua;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 40px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.viewport {
+  display: block;
+  text-align: center;
+  margin: 30px;
+  background-color: aquamarine;
+  padding: 20px;
+}
+
+footer {
+  display: block;
+  background-color: azure;
+  margin: 20px;
+  padding: 20px
+}
+
+button {
+  margin: 5px;
+  padding: 2px;
+}
+
+.start {
+  margin-bottom: 10px;
+}
+

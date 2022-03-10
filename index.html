@@ -9,13 +9,25 @@
   <title>Code Quiz</title>
 </head>
 <body>
-
-  <h1>Quiz Title Here</h1>
+  <header>
+    <h1>Code Quiz</h1>
+    <button class="start">START</button>
+    <p class="timer">Time Remaining:</p>
+  </header> 
   
-  <div>
-    <h2>Type Question Here</h2>
-    <!-- Create ordered list for multiple choice responses -->
-    <!-- Also figure out how to add buttons for selections -->
+  <div class="viewport">
+    <main>
+      <h2 class="question-name">Question:</h2>
+      <ul>
+        <li><button class="opt-a">A.</button></li>
+        <li><button class="opt-b">B.</button></li>
+        <li><button class="opt-c">C.</button></li>
+        <li><button class="opt-d">D.</button></li>
+      </ul>
+   </main> 
+   <footer>
+     <h3 class="question-response">Your answer is:</h3>
+   </footer>
   </div>
   
   <script src="./assets/js/script.js"></script>
