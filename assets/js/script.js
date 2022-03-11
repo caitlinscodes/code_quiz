@@ -10,6 +10,7 @@ var optD = document.querySelector("#opt-d");
 var result = document.querySelector("#question-response");
 var nextBtn = document.querySelector("#next");
 var ulEl = document.querySelector("#options");
+var displayHighScore = document.querySelector("#high-score");
 
 var questionCount = 1
 var highScore = 0;
@@ -57,13 +58,13 @@ function displayNextQuestion(){
 // User will click a button labeled "START" to open quiz
 startBtn.addEventListener("click", function(){
   countdown();
-    timerEl.textContent = "Time Remaining: 60 sec.";
+    timerEl.textContent = "Time Remaining: 40 sec.";
   displayQuestionOne();
 });
 
 // When button clicked a timer should start(displayed) and first question should display.
 // Pulled from in class assingment
-var timeLeft = 60;
+var timeLeft = 40;
 
 function countdown() {
   var timeInterval = setInterval(function () {
@@ -74,6 +75,7 @@ function countdown() {
       clearInterval(timeInterval);
       timerEl.textContent = "GAME OVER";
       startBtn.textContent = "Try Again";
+      quizComplete();
     }
 
   }, 1000);
@@ -195,9 +197,7 @@ function countdown() {
 
 //Quiz is over when all questions are answered or timer hits 0
 function quizComplete(){
-  if(timeLeft === 0){
-    displayScoreCard();
-  } else if (questionCount === 6){
+  if (questionCount === 6){
     displayScoreCard();
   }
 }
@@ -205,7 +205,7 @@ function quizComplete(){
 //When quiz is over user can save their initials and score.
 //Add final page to allow user to save High Score.
 function displayScoreCard(){
-  question.textContent = "Log your High Score";
-  result.textContent = " ";
-  ulEl.clear;
+  displayHighScore.textContent = "Current High Score: " + highScore;
+  question.textContent = "Log your Score!";
+  result.textContent = "Your High Score is: " + highScore;
 }

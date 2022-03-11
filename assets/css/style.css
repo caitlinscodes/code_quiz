@@ -20,6 +20,10 @@ h2 {
   margin-bottom: 10px;
 }
 
+#high-score {
+  text-align: left;
+}
+
 .viewport {
   display: block;
   text-align: center;
