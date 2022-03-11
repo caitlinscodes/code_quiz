@@ -9,10 +9,10 @@ var optC = document.querySelector("#opt-c");
 var optD = document.querySelector("#opt-d");
 var result = document.querySelector("#question-response");
 var nextBtn = document.querySelector("#next");
+var ulEl = document.querySelector("#options");
 
 var questionCount = 1
 var highScore = 0;
-// var correct = highScore + 5;
 var answer = localStorage.getItem("answer");
 
 function correctAnswer(){
@@ -21,12 +21,18 @@ function correctAnswer(){
 }
 
 function incorrectAnswer(){
+  highScore = highScore + 0;
   timeLeft = timeLeft - 2;
+}
+
+function clearResult(){
+  result.textContent = "Your answer is:";
 }
 
 nextBtn.addEventListener("click", function(){
   console.log("nextBtn");
   displayNextQuestion();
+  clearResult();
 });
 
 function displayNextQuestion(){
@@ -38,32 +44,24 @@ function displayNextQuestion(){
   } else if (questionCount == 3){
     displayQuestionThree();
     console.log("displayQuestionThree");
-  } 
+  } else if (questionCount == 4){
+    displayQuestionFour();
+    console.log("displayQuestionFour");
+  } else if (questionCount == 5){
+    displayQuestionFive();
+  } else if (questionCount == 6){
+    quizComplete();
+  }
 }
 
-
-// Will click a button labeled "START" to open quiz
-//should this be under a viewport function??
+// User will click a button labeled "START" to open quiz
 startBtn.addEventListener("click", function(){
   countdown();
     timerEl.textContent = "Time Remaining: 60 sec.";
   displayQuestionOne();
+});
 
-
-    })
-    
-  // };
-  // displayQuestionTwo(){
-  //   nextBtn.addEventListener("click", function(){
-
-  //   });
-  // };
-  
- //possibly add for loop to display questions?
-//  });
-
-
-// When button clicked a timer should start(displayed)
+// When button clicked a timer should start(displayed) and first question should display.
 // Pulled from in class assingment
 var timeLeft = 60;
 
@@ -75,33 +73,30 @@ function countdown() {
     if (timeLeft === 0) {
       clearInterval(timeInterval);
       timerEl.textContent = "GAME OVER";
+      startBtn.textContent = "Try Again";
     }
 
   }, 1000);
 }
-  //and first question displayed
+
   //When question is answered correctly push to next when answered incorrectly, time should be deducted from the timer.
   function displayQuestionOne(){
-    questionCount = questionCount +1;
-    question.textContent = "Practice Question Here?";
-    optA.textContent = "False";
-    optB.textContent = "True";
-    optC.textContent = "False";
-    optD.textContent = "False";
+    questionCount = questionCount + 1;
+    question.textContent = "What does HTML stand for?";
+    optA.textContent = "Hypertext Mixup Language";
+    optB.textContent = "Hypertext Markup Language";
+    optC.textContent = "Hypertext Mashup Language";
+    optD.textContent = "Hypertext Mouse Language";
 
-    viewport.addEventListener("click", function(event){
-      if (event.target == optB){
+    ulEl.addEventListener("click", function(event){
+      if (event.target === optB){
         result.textContent = "CORRECT! - gain 5 sec.";
         correctAnswer();
         localStorage.setItem("answer", highScore);
-        // nextBtn.setAttribute("data-state", "visible");
-        //figure out how to save answer and add 5 sec. to timer
       } else {
         result.textContent = "INCORRECT - lose 2 sec.";
         incorrectAnswer();
         localStorage.setItem("answer", highScore);
-        // nextBtn.setAttribute("data-state", "visible");
-        //figure out how to save answer and subtract 2 sec. from timer
       }
     });
   }
@@ -111,85 +106,106 @@ function countdown() {
     questionCount = questionCount + 1;
     console.log(questionCount);
     console.log("displayQuestionTwo");
-    question.textContent = "Practice Question Here?";
-    optA.textContent = "False";
-    optB.textContent = "False";
-    optC.textContent = "True";
-    optD.textContent = "False";
+    question.textContent = "Which dot notation is NOT a method in JavaScript?";
+    optA.textContent = ".push";
+    optB.textContent = ".sort";
+    optC.textContent = ".length";
+    optD.textContent = ".slice";
 
-    viewport.addEventListener("click", function(event){
-      if (event.target == optC){
+    ulEl.addEventListener("click", function(event){
+      if (event.target === optC){
         result.textContent = "CORRECT! - gain 5 sec.";
         correctAnswer();
         localStorage.setItem("answer", highScore);
-
-        // nextBtn.setAttribute("data-state", "visible");
       } else {
         result.textContent= "INCORRECT - lose 2 sec.";
         incorrectAnswer();
         localStorage.setItem("answer", highScore);
-        // nextBtn.setAttribute("data-state", "visible");
       }
     });
    }
   //Question answered > Save response localStorage > Present next question
 
   function displayQuestionThree(){
-    questionCount = questionCount +1;
+    questionCount = questionCount + 1;
     console.log(questionCount);
     console.log("displayQuestionThree");
-    question.textContent = "Practice Question Here?";
-    optA.textContent = "True";
-    optB.textContent = "False";
-    optC.textContent = "False";
-    optD.textContent = "False";
+    question.textContent = "Which HTML tag is self closing?";
+    optA.textContent = "Link";
+    optB.textContent = "Paragraph";
+    optC.textContent = "Figure";
+    optD.textContent = "Header";
 
-    viewport.addEventListener("click", function(event){
-      if (event.target == optA){
+    ulEl.addEventListener("click", function(event){
+      if (event.target === optA){
         result.textContent = "CORRECT! - gain 5 sec.";
         correctAnswer();
         localStorage.setItem("answer", highScore);
-        // nextBtn.setAttribute("data-state", "visible");
       } else {
         result.textContent= "INCORRECT - lose 2 sec.";
         incorrectAnswer();
         localStorage.setItem("answer", highScore);
-        // nextBtn.setAttribute("data-state", "visible");
       }
     });
   }
  //Question answered > Save response localStorage > Present next question
 
-  // function displayQuestionFour(){
-  //   question.textContent("Practice Question Here?");
-  //   optA.textContent("True");
-  //   optB.textContent("False");
-  //   optC.textContent("False");
-  //   optD.textContent("False");
+  function displayQuestionFour(){
+    questionCount = questionCount + 1;
+    question.textContent= "What does DOM stand for?";
+    optA.textContent = "Document Object Model";
+    optB.textContent = "Database Override Method";
+    optC.textContent = "Document Obstacle Method";
+    optD.textContent = "Database Object Model";
 
-  //   if ("click", optA){
-  //     result.textContent("CORRECT! - gain 5 sec.");
-  //   } else {
-  //     result.textContent("INCORRECT - lose 2 sec.");
-  //   }
-  // }
+    ulEl.addEventListener("click", function(event){
+      if (event.target === optA){
+        result.textContent = "CORRECT! - gain 5 sec.";
+        correctAnswer();
+        localStorage.setItem("answer", highScore);
+      } else {
+        result.textContent = "INCORRECT - lose 2 sec.";
+        incorrectAnswer();
+        localStorage.setItem("answer", highScore);
+      }
+    }); 
+  }
   //Question answered > Save response localStorage > Present next question
 
-  // function displayQuestionFive(){
-  //   question.textContent("Practice Question Here?");
-  //   optA.textContent("False");
-  //   optB.textContent("False");
-  //   optC.textContent("False");
-  //   optD.textContent("True");
+  function displayQuestionFive(){
+    questionCount = questionCount + 1;
+    question.textContent = "Which of the below options is NOT a Primitive Data Type?";
+    optA.textContent = "String";
+    optB.textContent = "Number";
+    optC.textContent = "Boolean";
+    optD.textContent = "Modulus";
 
-  //   if ("click", optD){
-  //     result.textContent("CORRECT! - gain 5 sec.");
-  //   } else {
-  //     result.textContent("INCORRECT - lose 2 sec.");
-  //   }
-  // }
-
+    ulEl.addEventListener("click", function(event){
+      if (event.target === optD){
+        result.textContent = "CORRECT! - gain 5 sec.";
+        correctAnswer();
+        localStorage.setItem("answer", highScore);
+      } else {
+        result.textContent = "INCORRECT - lose 2 sec.";
+        incorrectAnswer();
+        localStorage.setItem("answer", highScore);
+      }
+    });
+  }
 
 //Quiz is over when all questions are answered or timer hits 0
+function quizComplete(){
+  if(timeLeft === 0){
+    displayScoreCard();
+  } else if (questionCount === 6){
+    displayScoreCard();
+  }
+}
 
 //When quiz is over user can save their initials and score.
+//Add final page to allow user to save High Score.
+function displayScoreCard(){
+  question.textContent = "Log your High Score";
+  result.textContent = " ";
+  ulEl.clear;
+}
