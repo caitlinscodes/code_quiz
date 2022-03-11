@@ -8,22 +8,66 @@ var optB = document.querySelector("#opt-b");
 var optC = document.querySelector("#opt-c");
 var optD = document.querySelector("#opt-d");
 var result = document.querySelector("#question-response");
+var nextBtn = document.querySelector("#next");
 
+var questionCount = 1
+var highScore = 0;
+// var correct = highScore + 5;
+var answer = localStorage.getItem("answer");
+
+function correctAnswer(){
+  highScore = highScore + 5;
+  timeLeft = timeLeft + 5;
+}
+
+function incorrectAnswer(){
+  timeLeft = timeLeft - 2;
+}
+
+nextBtn.addEventListener("click", function(){
+  console.log("nextBtn");
+  displayNextQuestion();
+});
+
+function displayNextQuestion(){
+  console.log("displayNextQuestion");
+  console.log(questionCount);
+  if(questionCount == 2){
+    displayQuestionTwo();
+    console.log("displayQuestionTwo");
+  } else if (questionCount == 3){
+    displayQuestionThree();
+    console.log("displayQuestionThree");
+  } 
+}
 
 
 // Will click a button labeled "START" to open quiz
 //should this be under a viewport function??
 startBtn.addEventListener("click", function(){
   countdown();
+    timerEl.textContent = "Time Remaining: 60 sec.";
   displayQuestionOne();
+
+
+    })
+    
+  // };
+  // displayQuestionTwo(){
+  //   nextBtn.addEventListener("click", function(){
+
+  //   });
+  // };
+  
  //possibly add for loop to display questions?
- });
+//  });
 
 
 // When button clicked a timer should start(displayed)
 // Pulled from in class assingment
+var timeLeft = 60;
+
 function countdown() {
-  var timeLeft = 60;
   var timeInterval = setInterval(function () {
     timeLeft--;
     timerEl.textContent = "Time Remaining: " + timeLeft + " sec.";
@@ -38,54 +82,83 @@ function countdown() {
   //and first question displayed
   //When question is answered correctly push to next when answered incorrectly, time should be deducted from the timer.
   function displayQuestionOne(){
+    questionCount = questionCount +1;
     question.textContent = "Practice Question Here?";
     optA.textContent = "False";
     optB.textContent = "True";
     optC.textContent = "False";
     optD.textContent = "False";
 
-    optB.addEventListener("click", function(){
-      if ("click", optB){
+    viewport.addEventListener("click", function(event){
+      if (event.target == optB){
         result.textContent = "CORRECT! - gain 5 sec.";
-        //figure out how to add 5 sec. to timer
+        correctAnswer();
+        localStorage.setItem("answer", highScore);
+        // nextBtn.setAttribute("data-state", "visible");
+        //figure out how to save answer and add 5 sec. to timer
       } else {
         result.textContent = "INCORRECT - lose 2 sec.";
-        //figure out what option does not appear
-        //figure out how to subtract 2 sec. from timer
+        incorrectAnswer();
+        localStorage.setItem("answer", highScore);
+        // nextBtn.setAttribute("data-state", "visible");
+        //figure out how to save answer and subtract 2 sec. from timer
       }
     });
   }
-  //Question answered > Save response logicStorage > Present next question
+  //Question answered > Save response localStorage > Present next question
 
-  // function displayQuestionTwo(){
-  //   question.textContent("Practice Question Here?");
-  //   optA.textContent("False");
-  //   optB.textContent("False");
-  //   optC.textContent("True");
-  //   optD.textContent("False");
+  function displayQuestionTwo(){
+    questionCount = questionCount + 1;
+    console.log(questionCount);
+    console.log("displayQuestionTwo");
+    question.textContent = "Practice Question Here?";
+    optA.textContent = "False";
+    optB.textContent = "False";
+    optC.textContent = "True";
+    optD.textContent = "False";
 
-  //   if ("click", optC){
-  //     result.textContent("CORRECT! - gain 5 sec.");
-  //   } else {
-  //     result.textContent("INCORRECT - lose 2 sec.");
-  //   }
-  // }
-    //Question answered > Save response logicStorage > Present next question
+    viewport.addEventListener("click", function(event){
+      if (event.target == optC){
+        result.textContent = "CORRECT! - gain 5 sec.";
+        correctAnswer();
+        localStorage.setItem("answer", highScore);
 
-  // function displayQuestionThree(){
-  //   question.textContent("Practice Question Here?");
-  //   optA.textContent("True");
-  //   optB.textContent("False");
-  //   optC.textContent("False");
-  //   optD.textContent("False");
+        // nextBtn.setAttribute("data-state", "visible");
+      } else {
+        result.textContent= "INCORRECT - lose 2 sec.";
+        incorrectAnswer();
+        localStorage.setItem("answer", highScore);
+        // nextBtn.setAttribute("data-state", "visible");
+      }
+    });
+   }
+  //Question answered > Save response localStorage > Present next question
 
-  //   if ("click", optA){
-  //     result.textContent("CORRECT! - gain 5 sec.");
-  //   } else {
-  //     result.textContent("INCORRECT - lose 2 sec.");
-  //   }
-  // }
-  //   //Question answered > Save response logicStorage > Present next question
+  function displayQuestionThree(){
+    questionCount = questionCount +1;
+    console.log(questionCount);
+    console.log("displayQuestionThree");
+    question.textContent = "Practice Question Here?";
+    optA.textContent = "True";
+    optB.textContent = "False";
+    optC.textContent = "False";
+    optD.textContent = "False";
+
+    viewport.addEventListener("click", function(event){
+      if (event.target == optA){
+        result.textContent = "CORRECT! - gain 5 sec.";
+        correctAnswer();
+        localStorage.setItem("answer", highScore);
+        // nextBtn.setAttribute("data-state", "visible");
+      } else {
+        result.textContent= "INCORRECT - lose 2 sec.";
+        incorrectAnswer();
+        localStorage.setItem("answer", highScore);
+        // nextBtn.setAttribute("data-state", "visible");
+      }
+    });
+  }
+ //Question answered > Save response localStorage > Present next question
 
   // function displayQuestionFour(){
   //   question.textContent("Practice Question Here?");
@@ -100,7 +173,7 @@ function countdown() {
   //     result.textContent("INCORRECT - lose 2 sec.");
   //   }
   // }
-  //   //Question answered > Save response logicStorage > Present next question
+  //Question answered > Save response localStorage > Present next question
 
   // function displayQuestionFive(){
   //   question.textContent("Practice Question Here?");
@@ -120,9 +193,3 @@ function countdown() {
 //Quiz is over when all questions are answered or timer hits 0
 
 //When quiz is over user can save their initials and score.
-
-
-//Function Calling
-// countdown();
-// startQuiz();
-// displayQuestionOne();
